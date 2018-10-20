@@ -1,1 +1,1 @@
-import os, sys; os.environ.get('AUTOWRAPT_BOOTSTRAP') and __import__('decimal-monkeypatch.bootstrap') and sys.modules['decimal-monkeypatch.bootstrap'].bootstrap()
+import os, sys; os.environ.get('AUTOWRAPT_BOOTSTRAP') and __import__('decimal_monkeypatch.bootstrap') and sys.modules['decimal_monkeypatch.bootstrap'].bootstrap()
