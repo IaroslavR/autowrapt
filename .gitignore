@@ -49,3 +49,6 @@ docs/_build
 htmlcov
 .coverage
 .tddium*
+
+# PyCharm
+.idea
