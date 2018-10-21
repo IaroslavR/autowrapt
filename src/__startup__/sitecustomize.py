@@ -1,4 +1,4 @@
-'''Provides a custom 'sitecustomize' module which will be used when the
+"""Provides a custom 'sitecustomize' module which will be used when the
 'autowrapt' wrapper script is used when launching a Python program. This
 custom 'sitecustomize' module will find any existing 'sitecustomize'
 module which may have been overridden and ensures that that is imported
@@ -8,21 +8,22 @@ functions after the 'usercustomize' module is loaded will be applied. If
 however 'usercustomize' support is not enabled, then the registration
 will be forced immediately.
 
-'''
+"""
 
 import os
-import sys
 import site
+import sys
 import time
 
-_debug = os.environ.get('AUTOWRAPT_DEBUG',
-        'off').lower() in ('on', 'true', '1')
+_debug = os.environ.get('AUTOWRAPT_DEBUG', 'off').lower() in ('on', 'true', '1')
+
 
 def log_message(text, *args):
     if _debug:
         text = text % args
         timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
         print('AUTOWRAPT: %s (%d) - %s' % (timestamp, os.getpid(), text))
+
 
 log_message('autowrapt - sitecustomize (%s)', __file__)
 
