@@ -18,9 +18,11 @@ def autowrapt_decimal(_module):
     print('cdecimal.Context monkey-patch for boto(if rounding=None, then 6 passed to Context instead) applied\n')
 
 
-def autowrapt_psycopg2(_module):
-    from psycopg2 import _json
+def autowrapt_psycopg2(module):
     import ujson
-    _json.json = ujson
+    if module.__name__ == 'psycopg2._json':
+        module.json = ujson
+    else:
+        module._json.json = ujson
     print('psycopg2._json.json monkey-patched to ujson instead of json\n')
 

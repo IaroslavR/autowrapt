@@ -20,7 +20,10 @@ setup_kwargs = dict(
     data_files=[(get_python_lib(prefix=''), ['autowrapt-init.pth'])],
     entry_points={
         'decimal': ['decimal = decimal_monkeypatch.patch:autowrapt_decimal'],
-        'psycopg2': ['psycopg2 = decimal_monkeypatch.patch:autowrapt_psycopg2'],
+        'psycopg2': [
+            'psycopg2 = decimal_monkeypatch.patch:autowrapt_psycopg2',
+            'psycopg2._json = decimal_monkeypatch.patch:autowrapt_psycopg2',
+        ],
     },
     install_requires=['wrapt>=1.10.4', 'm3-cdecimal==2.3', 'ujson==1.35'],
 )
