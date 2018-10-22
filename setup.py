@@ -6,8 +6,8 @@ with open("README.md", "r") as f:
 
 setup_kwargs = dict(
     name='decimal-monkeypatch',
-    version='0.2.5',
-    description='Monkey patches Python 2 decimal to cdecimal',
+    version='0.3.0',
+    description='Python 2 performance patches: decimal to cdecimal, json to ujson for psycopg2',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Iaroslav Russkykh',
@@ -18,8 +18,11 @@ setup_kwargs = dict(
     package_dir={'decimal_monkeypatch': 'src'},
     package_data={'decimal_monkeypatch': ['__startup__/sitecustomize.py']},
     data_files=[(get_python_lib(prefix=''), ['autowrapt-init.pth'])],
-    entry_points={'decimal': ['decimal = decimal_monkeypatch.patch:autowrapt_decimal']},
-    install_requires=['wrapt>=1.10.4', 'm3-cdecimal==2.3', ],
+    entry_points={
+        'decimal': ['decimal = decimal_monkeypatch.patch:autowrapt_decimal'],
+        'psycopg2': ['psycopg2 = decimal_monkeypatch.patch:autowrapt_psycopg2'],
+    },
+    install_requires=['wrapt>=1.10.4', 'm3-cdecimal==2.3', 'ujson==1.35'],
 )
 
 setup(**setup_kwargs)
