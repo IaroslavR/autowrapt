@@ -40,7 +40,7 @@ def autowrapt_dynamodb(module):
                 res[k] = v
             else:
                 raise ValueError('Unknown type: {}'.format(type(v)))
-            return res
+        return res
 
     module.deepcopy = deepcopy
     print('boto.dynamodb2.items.deepcopy monkey-patched\n')

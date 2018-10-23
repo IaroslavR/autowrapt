@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 
 setup_kwargs = dict(
     name='decimal-monkeypatch',
-    version='0.4.1',
+    version='0.4.2',
     description='Python 2 performance patches: decimal to cdecimal, json to ujson for psycopg2',
     long_description=long_description,
     long_description_content_type="text/markdown",
