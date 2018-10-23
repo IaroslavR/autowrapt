@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 
 setup_kwargs = dict(
     name='decimal-monkeypatch',
-    version='0.3.1',
+    version='0.4.0',
     description='Python 2 performance patches: decimal to cdecimal, json to ujson for psycopg2',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -21,9 +21,9 @@ setup_kwargs = dict(
     entry_points={
         'decimal': ['decimal = decimal_monkeypatch.patch:autowrapt_decimal'],
         'psycopg2': [
-            'psycopg2 = decimal_monkeypatch.patch:autowrapt_psycopg2',
             'psycopg2._json = decimal_monkeypatch.patch:autowrapt_psycopg2',
         ],
+        'dynamodb': ['boto.dynamodb2.items = decimal_monkeypatch.patch:autowrapt_dynamodb', ]
     },
     install_requires=['wrapt>=1.10.4', 'm3-cdecimal==2.3', 'ujson==1.35'],
 )

@@ -20,9 +20,28 @@ def autowrapt_decimal(_module):
 
 def autowrapt_psycopg2(module):
     import ujson
-    if module.__name__ == 'psycopg2._json':
-        module.json = ujson
-    else:
-        module._json.json = ujson
+    module.json = ujson
     print('psycopg2._json.json monkey-patched to ujson instead of json\n')
+
+
+def autowrapt_dynamodb(module):
+    from decimal import Decimal
+
+    def deepcopy(data):
+        """Expected dicts nesting level 1. Lists, sets, and nested dicts
+         contains only simple types"""
+        res = {}
+        for k, v in data.items():
+            if type(v) in [Decimal, str, int, unicode, long, bool]:
+                res[k] = v
+            elif type(v) in [set, dict, list]:
+                res[k] = type(v)(v)
+            elif v is None:
+                res[k] = v
+            else:
+                raise ValueError('Unknown type: {}'.format(type(v)))
+            return res
+
+    module.deepcopy = deepcopy
+    print('boto.dynamodb2.items.deepcopy monkey-patched\n')
 
