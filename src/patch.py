@@ -26,13 +26,15 @@ def autowrapt_psycopg2(module):
 
 def autowrapt_dynamodb(module):
     from decimal import Decimal
+    from boto.dynamodb.types import Binary
+
 
     def deepcopy(data):
         """Expected dicts nesting level 1. Lists, sets, and nested dicts
          contains only simple types"""
         res = {}
         for k, v in data.items():
-            if type(v) in [Decimal, str, int, unicode, long, bool]:
+            if type(v) in [Decimal, Binary, str, int, unicode, long, bool]:
                 res[k] = v
             elif type(v) in [set, dict, list]:
                 res[k] = type(v)(v)
